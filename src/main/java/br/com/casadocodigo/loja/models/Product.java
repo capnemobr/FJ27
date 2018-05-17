@@ -1,10 +1,15 @@
 package br.com.casadocodigo.loja.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+
 
 @Entity
 public class Product {
@@ -19,6 +24,9 @@ public class Product {
 	private String description;
 	
 	private int numberOfPages;
+	@ElementCollection
+	private List<Price> prices = new ArrayList<Price>();
+	
 	public String getTitle() {
 		return title;
 	}
@@ -39,9 +47,15 @@ public class Product {
 	}
 	@Override
 	public String toString() {
-		return "Product [title=" + title + ", description=" + description + ", numberOfPages=" + numberOfPages + "]";
+		return "Product [id=" + id + ", title=" + title + ", description=" + description + ", numberOfPages="
+				+ numberOfPages + ", prices=" + prices + "]";
+	}
+	public List<Price> getPrices() {
+		return prices;
+	}
+	public void setPrices(List<Price> prices) {
+		this.prices = prices;
 	}
 	
 	
-
 }
