@@ -24,14 +24,15 @@ public class ProductsController {
 	
 	@Autowired
 	private ProductDAO productDAO;
-	
-	@InitBinder
-	public void initBinder(WebDataBinder webDataBinder) {
-		webDataBinder.addValidators(new ProductValidator());
-	}
+
+//  Exercicio 5.8 BEAN VALIDATION	
+//	@InitBinder
+//	public void initBinder(WebDataBinder webDataBinder) {
+//		webDataBinder.addValidators(new ProductValidator());
+//	}
 	
 	@RequestMapping("/form")
-	public ModelAndView form() {
+	public ModelAndView form(Product product) {
 		ModelAndView modelAndView = new ModelAndView("products/form");
 		modelAndView.addObject("types", BookType.values());
 		return modelAndView;
@@ -42,7 +43,7 @@ public class ProductsController {
     public ModelAndView save(@Valid Product product,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         
     	if(bindingResult.hasErrors()) {
-    		return form();
+    		return form(product);
     	}
     		
     	productDAO.save(product);    	
