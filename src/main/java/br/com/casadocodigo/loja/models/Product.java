@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 @Entity
@@ -37,11 +38,25 @@ public class Product {
 	@ElementCollection
 	private List<Price> prices = new ArrayList<Price>();
 	
-    @DateTimeFormat
+    @DateTimeFormat(iso=ISO.DATE)
 	private Calendar releaseDate;
+    
+    private String summaryPath;
     
     
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getSummaryPath() {
+		return summaryPath;
+	}
+	public void setSummaryPath(String summaryPath) {
+		this.summaryPath = summaryPath;
+	}
 	public Calendar getReleaseDate() {
 		return releaseDate;
 	}

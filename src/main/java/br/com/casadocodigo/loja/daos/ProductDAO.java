@@ -23,4 +23,10 @@ public class ProductDAO {
 		
 	}
 
+    public Product find(Long id) {
+        return manager.createQuery("select distinct(p) from Product p join fetch p.prices where p.id = :id", Product.class)
+            .setParameter("id", id)
+            .getSingleResult();
+    }
+
 }
