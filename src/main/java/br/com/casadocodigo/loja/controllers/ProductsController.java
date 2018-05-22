@@ -3,6 +3,8 @@ package br.com.casadocodigo.loja.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -43,6 +45,7 @@ public class ProductsController {
 	
     @RequestMapping(method=RequestMethod.POST)
     @Transactional
+    @CacheEvict(value="lastProducts", allEntries=true)
     public ModelAndView save(@Valid Product product,BindingResult bindingResult, RedirectAttributes redirectAttributes,
     		                 MultipartFile summary) {
         
@@ -61,6 +64,7 @@ public class ProductsController {
     }
     
     @RequestMapping(method=RequestMethod.GET)
+    @Cacheable(value="lastProducts")
     public ModelAndView list() {
     	ModelAndView modelAndView = new ModelAndView("products/list");
     	modelAndView.addObject("products", productDAO.list());
