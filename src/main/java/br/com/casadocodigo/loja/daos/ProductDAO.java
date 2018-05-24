@@ -8,6 +8,9 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import br.com.casadocodigo.loja.models.Product;
 
+// ArrobaRepository = ArrobaComponent , são a mesma coisa no final são componentes, mas o spring usa o Repository para
+// diferenciar um dia caso precise.
+
 @Repository
 public class ProductDAO {
 	
