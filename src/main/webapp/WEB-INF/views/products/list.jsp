@@ -1,12 +1,26 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Listagem de Produtos</title>
-</head>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="cdc" %>
+<cdc:page title="listagem de Produtos"  >
+
+
 <label> ${sucesso} </label>
-<body>
+
+    <sec:authorize access="isAuthenticated()">
+    <c:url value="/logout" var="logout" />
+    <a href="${logout}" > Logout</a>
+       <sec:authentication property="principal" var="user"/>
+       <div>
+          Olá${user.name}
+       </div>
+    </sec:authorize>
+    
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <c:url value="/products/form" var="formLink" />
+        <a href="${formLink}">
+           Cadastrar novo produto
+        </a>
+    </sec:authorize>
     <table>
 		<tr>
 			<th>Título</th>
@@ -28,5 +42,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-</body>
-</html>
+
+</cdc:page>
