@@ -11,7 +11,7 @@
     <a href="${logout}" > Logout</a>
        <sec:authentication property="principal" var="user"/>
        <div>
-          Olá${user.name}
+          Olá ${user.name}
        </div>
     </sec:authorize>
     

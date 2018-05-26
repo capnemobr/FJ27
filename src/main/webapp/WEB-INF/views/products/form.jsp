@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Cadastro de livros</title>
 </head>
-<form:form action="${spring:mvcUrl('PC#save').build()}" method="post" commandName="product" 
+<form:form servletRelativeAction="${spring:mvcUrl('PC#save').build()}"  commandName="product" 
             enctype="multipart/form-data">
 	<div>
 		<label for="title">Título</label>
